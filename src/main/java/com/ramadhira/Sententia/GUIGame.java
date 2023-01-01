@@ -37,8 +37,8 @@ public class GUIGame {
 
     public GUIGame(){
         Vector<Character> characters = new Vector<Character>();
-        characters.add(new CharacterRalune());
-        characters.add(new CharacterFAXXIV());
+        // characters.add(new Character());
+        // characters.add(new CharacterFAXXIV());
         int[][] snakeLadder = {
             {11,1}
         };
@@ -103,6 +103,8 @@ public class GUIGame {
         
         pane = new HBox(boardPane,statePane);
         pane.setBackground(new Background(new BackgroundImage(new Image(getClass().getResourceAsStream("bg.jpg")), null, null, null, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, false, true))));
+
+        
         
     }
     public Parent getGUI(){return pane;}
