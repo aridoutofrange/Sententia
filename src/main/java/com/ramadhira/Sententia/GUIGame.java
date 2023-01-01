@@ -7,10 +7,14 @@ import javafx.scene.layout.VBox;
 
 import java.util.Vector;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
@@ -23,7 +27,10 @@ public class GUIGame {
 
     private Label initialSquare = new Label();
 
-    private HBox pane,boardPane;
+    private Label backButton;
+    private Label diceButton, dice;
+
+    private HBox pane,boardPane,dicePane;
     private VBox statePane;
     private StackPane board;
     private GameBoard gameBoard;
@@ -71,10 +78,29 @@ public class GUIGame {
         boardPane.setAlignment(Pos.CENTER);
         boardPane.setPadding(new Insets(75, 0, 75, 0));
 
-        
-        statePane = new VBox();
+        backButton = new GUIBackButton().getGUI();
+        backButton.setOnMouseClicked(new EventHandler<MouseEvent>() { 
+            @Override 
+            public void handle(MouseEvent e) { 
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setContentText("Back");
+                alert.show();
+            }
+        });
+        diceButton = new GUIDiceButton().getGUI();
+        dice = new GUIDice(6).getGUI();
+
+        dicePane = new HBox(dice);
+        dicePane.setAlignment(Pos.CENTER);
+        dicePane.setPrefHeight(300);
+        dicePane.setPrefWidth(250);
+
+        statePane = new VBox(backButton,dicePane,diceButton);
         statePane.setPrefWidth(350);
-        statePane.setBackground(new Background(new BackgroundFill(Color.GRAY,CornerRadii.EMPTY,Insets.EMPTY)));
+        statePane.setSpacing(50);
+        statePane.setAlignment(Pos.CENTER);
+        statePane.setBackground(new Background(new BackgroundFill(Color.web("#9dbac4",0.6),CornerRadii.EMPTY,Insets.EMPTY)));
+        
         pane = new HBox(boardPane,statePane);
         pane.setBackground(new Background(new BackgroundImage(new Image(getClass().getResourceAsStream("bg.jpg")), null, null, null, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, false, true))));
         

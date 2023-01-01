@@ -35,9 +35,9 @@ git clone https://github.com/aridoutofrange/Sententia/tree/development
 
 TODO :
 GUI
-    backButton
-    DICE
-    diceButton
+    backButton x
+    DICE x
+    diceButton x
     ladder
     snaker
     trianglePlayer
