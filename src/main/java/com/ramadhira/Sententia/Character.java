@@ -1,8 +1,9 @@
 package com.ramadhira.Sententia;
-// 1. Ralune (teknisi): 
-// Kelebihan = Ketika dadu “6” “6” bisa naik keatas 1 tingkat.
 
 import java.util.Vector;
+
+// 1. Ralune (teknisi): 
+// Kelebihan = Ketika dadu “6” “6” bisa naik keatas 1 tingkat.
 
 // Kekurangan = Hanya bisa dipake 1 kali pasifnya.
 
@@ -20,9 +21,10 @@ public class Character {
     public String image;
     public String pasiveInformation;
     public int position;
-    public boolean isCanUseSnake;
-    public boolean isCanUseLadder;
-    public boolean isCanUseCard;
+    public boolean isCanUseSnake = true;
+    public boolean isCanUseLadder = true;
+    public boolean isCanUseCard = true;
+    public boolean isCanUsePassiveCharacter = true;
     public int skipTurn;
     public Vector<Boolean> streak;
     public void move(int dice){
