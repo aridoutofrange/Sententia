@@ -21,6 +21,8 @@ import javafx.scene.paint.Color;
 public class GUIGame {
     private Color[] tileColors = {Color.web("#d7ebf4"),Color.web("#a5bccb")};
 
+    private Label initialSquare = new Label();
+
     private HBox pane,boardPane;
     private VBox statePane;
     private StackPane board;
@@ -33,6 +35,14 @@ public class GUIGame {
         int[][] snakeLadder = {
             {11,1}
         };
+
+        initialSquare.setPrefHeight(50);
+        initialSquare.setPrefWidth(100);
+        initialSquare.setBackground(new Background(new BackgroundFill(Color.web("#f2c26d"),CornerRadii.EMPTY,Insets.EMPTY)));
+        initialSquare.setTranslateX(-100);
+        initialSquare.setTranslateY(0);
+
+
         gameBoard = new GameBoard(characters,snakeLadder);
         Parent[] squares = new Parent[gameBoard.tiles.length];
         for(Tile tile : gameBoard.tiles){
@@ -54,6 +64,7 @@ public class GUIGame {
         board.setAlignment(Pos.BOTTOM_LEFT);
         board.setBackground(new Background(new BackgroundFill(Color.BLACK,CornerRadii.EMPTY,Insets.EMPTY)));
         board.getChildren().addAll(squares);
+        board.getChildren().add(initialSquare);
 
         boardPane = new HBox(board);
         boardPane.setPrefWidth(750);
