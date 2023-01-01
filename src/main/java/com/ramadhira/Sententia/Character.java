@@ -19,6 +19,7 @@ import java.util.Vector;
 public class Character {
     public String name;
     public String image;
+    public EnumPlayerType playerType;
     public String pasiveInformation;
     public int position;
     public boolean isCanUseSnake = true;
