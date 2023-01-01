@@ -1,4 +1,4 @@
 module com.ramadhira.Sententia {
-    requires javafx.controls;
+    requires transitive javafx.controls;
     exports com.ramadhira.Sententia;
 }

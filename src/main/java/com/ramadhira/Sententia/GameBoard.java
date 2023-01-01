@@ -13,6 +13,7 @@ public class GameBoard {
 
     public Vector<Character> players;
 	public Tile[] tiles;
+    public int currentPlayer;
 	
 	public GameBoard(Vector<Character> players,int[][] snakeLadder) {
         this.players = players;
@@ -26,8 +27,14 @@ public class GameBoard {
                     break;
                 }
             }
-            if(isHasSL) tiles[i] = new Tile(i+1,null);
+            if(!isHasSL) tiles[i] = new Tile(i+1,null);
         }
 	}
+    public void movePlayer(int player) {
 
+    }
+
+    // public void buffPlayer(Character player,int changes, int type, String buffName){
+    //     if(buffName.equals("position"))
+    // }
 }

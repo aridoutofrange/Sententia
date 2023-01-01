@@ -1,5 +1,5 @@
 package com.ramadhira.Sententia;
 
-public enum PlayerType {
+public enum EnumPlayerType {
 	HUMAN, COMPUTER;
 }
