@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 
 public class CharacterRalune extends Character {
     public String name = "Ralune";
+    public String image = "charralune.png";
     @Override
     public void move(int dice){
         super.move(dice);

@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 
 public class CharacterPhaseQuanta extends Character {
     public String name = "Phase Quanta";
+    public String image = "charpq.png";
     @Override
     public Parent getGameModel(){
         Parent p = super.getGameModel();

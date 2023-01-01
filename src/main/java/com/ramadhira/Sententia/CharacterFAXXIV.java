@@ -4,6 +4,7 @@ import javafx.scene.Parent;
 
 public class CharacterFAXXIV extends Character {
     public String name = "FA XXIV";
+    public String image = "charfaxxiv.png";
     @Override
     public Parent getGameModel(){
         Parent p = super.getGameModel();
