@@ -2,6 +2,9 @@ package com.ramadhira.Sententia;
 
 import java.util.Vector;
 
+import javafx.scene.Parent;
+import javafx.scene.control.Label;
+
 // 1. Ralune (teknisi): 
 // Kelebihan = Ketika dadu “6” “6” bisa naik keatas 1 tingkat.
 
@@ -31,5 +34,15 @@ public class Character {
     public void move(int dice){
         streak.add(dice == 6);
         position = position + dice;
+    }
+
+    public Parent getGameModel(){
+        Label p = new Label();
+        p.setPrefHeight(20);
+        p.setPrefWidth(20);
+        p.setTranslateX(15);
+        p.setTranslateY(-15);
+        p.setStyle("-fx-border-color: black;-fx-border-radius: 10 10 10 10;-fx-background-radius: 10 10 10 10;-fx-background-color: black;");
+        return p;
     }
 }
