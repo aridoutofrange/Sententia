@@ -11,6 +11,9 @@ Sententia is a snake and ladder game where the player can play as the newcomers 
 <li> Visual database design tool i.e MySQL Workbench or XAMPP </li>
 
 # How to Install
-<li> Clone or download [this repository](https://github.com/aridoutofrange/Sententia/tree/development) </li>
+<li> Clone or download this repository </li>
+```
+git clone https://github.com/aridoutofrange/Sententia/tree/development
+```
 <li> Run this game on your IDE </li>
 <li> </li>
