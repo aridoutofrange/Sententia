@@ -32,3 +32,22 @@ git clone https://github.com/aridoutofrange/Sententia/tree/development
 <li> If you stumble upon a snake, you'll move downwars towards the angle of the snake </li>
 <li> There will be bonus cards scattered all over the boxes, use them wisely </li>
 <li> Whoever reaches the 100th position first, they're the winner </li>
+
+TODO :
+GUI
+    backButton
+    DICE
+    diceButton
+    ladder
+    snaker
+    trianglePlayer
+    card
+
+Features
+    dice
+    move
+    step
+    score
+    store leaderboard to the db
+    smallAnimation
+    difficult 
