@@ -1,7 +1,6 @@
 package com.ramadhira.Sententia;
 
-import java.util.Vector;
-
+import java.util.Random;
 
 public class GameBoard {
 	public static final int ROWS = 10;
@@ -11,12 +10,24 @@ public class GameBoard {
 	public static final int COMPUTER_MOVE_DELAY = 2;
 	public static final int PLAYER_STARTING_POSITION = 0;
 
-    public Vector<Character> players;
 	public Tile[] tiles;
-    public int currentPlayer;
+    public int turn;
 	
-	public GameBoard(Vector<Character> players,int[][] snakeLadder) {
-        this.players = players;
+	public GameBoard(int[][] snakeLadder) {
+
+        // set computer
+        Random rn = new Random();
+        int ic = 0;
+        int cmp = rn.nextInt(6);
+        for(Character c : App.characters){
+            if(!c.equals(App.player1))ic++;
+            if(!c.equals(App.player1) && ic == cmp){
+                App.player2 = c;
+                break;
+            }
+        }
+
+        // set tiles and its snakeladder
         tiles = new Tile[ROWS*COLS];
         for (int i = 0; i < (ROWS*COLS); i++) {
             boolean isHasSL = false;

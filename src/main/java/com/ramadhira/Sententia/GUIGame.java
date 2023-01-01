@@ -5,8 +5,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-import java.util.Vector;
-
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -34,11 +32,9 @@ public class GUIGame {
     private VBox statePane;
     private StackPane board;
     private GameBoard gameBoard;
+    private Label p1,p2;
 
     public GUIGame(){
-        Vector<Character> characters = new Vector<Character>();
-        // characters.add(new Character());
-        // characters.add(new CharacterFAXXIV());
         int[][] snakeLadder = {
             {11,1}
         };
@@ -50,7 +46,7 @@ public class GUIGame {
         initialSquare.setTranslateY(0);
 
 
-        gameBoard = new GameBoard(characters,snakeLadder);
+        gameBoard = new GameBoard(snakeLadder);
         Parent[] squares = new Parent[gameBoard.tiles.length];
         for(Tile tile : gameBoard.tiles){
             int position = tile.position;
@@ -104,7 +100,8 @@ public class GUIGame {
         pane = new HBox(boardPane,statePane);
         pane.setBackground(new Background(new BackgroundImage(new Image(getClass().getResourceAsStream("bg.jpg")), null, null, null, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, false, true))));
 
-        
+        p1 = App.player1.getGameModel();
+        p2 = App.player2.getGameModel();
         
     }
     public Parent getGUI(){return pane;}
