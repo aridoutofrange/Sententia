@@ -1,9 +1,6 @@
 package com.ramadhira.Sententia;
 
-/**
- *
- * @author Aris
- */
-public enum GameMode {
+
+public enum EnumGameMode {
 	AGAINST_HUMAN, AGAINST_COMPUTER
 }
