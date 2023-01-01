@@ -7,7 +7,6 @@
 - Mochamad Kelvin Fadhilah - 2107176
 - Debri Yanti Safitri Santoso - 2104174
 - Melisa Galuh Parwati - 2100750
-<br>
 
 # Sententia
 ### Sententia - to be sentient
