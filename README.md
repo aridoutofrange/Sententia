@@ -14,3 +14,5 @@ Sententia is a snake and ladder game where the player can play as the newcomers 
 <li> Clone or download this repository </li>
 <li> Run this game on your IDE </li>
 <li> </li>
+
+# How to Play
