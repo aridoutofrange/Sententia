@@ -11,24 +11,29 @@ public class GameBoard {
 	public static final int PLAYER_STARTING_POSITION = 0;
 
 	public Tile[] tiles;
-    public int turn;
+    public int turn = 0;
+    public int latestDice;
 	
-	public GameBoard(int[][] snakeLadder) {
+	public GameBoard() {
 
         // set computer
-        Random rn = new Random();
-        int ic = 0;
-        int cmp = rn.nextInt(6);
-        for(Character c : App.characters){
-            if(!c.equals(App.player1))ic++;
-            if(!c.equals(App.player1) && ic == cmp){
-                App.player2 = c;
-                break;
+        if(App.gameMode == EnumGameMode.AGAINST_COMPUTER){
+
+            Random rn = new Random();
+            int ic = 0;
+            int cmp = rn.nextInt(2);
+            for(Character c : App.characters){
+                if(!c.equals(App.players[0]) && ic == cmp){
+                    App.players[1] = c;
+                    break;
+                }
+                if(!c.equals(App.players[0]))ic++;
             }
         }
 
         // set tiles and its snakeladder
         tiles = new Tile[ROWS*COLS];
+        int[][] snakeLadder = App.diff == 0 ? App.snakeLadderEasy : App.diff == 1 ? App.snakeLadderMedium : App.snakeLadderHard;
         for (int i = 0; i < (ROWS*COLS); i++) {
             boolean isHasSL = false;
             for(int[] sl : snakeLadder){
@@ -42,10 +47,34 @@ public class GameBoard {
         }
 	}
     public void movePlayer(int player) {
+        Random rn = new Random();
+        Character ple = App.players[player];
+        int dice = rn.nextInt(6)+1;
+        latestDice = dice;
+        App.players[player].move(dice);
 
+        // register each skill of characters
+        if(ple.streak.size() == 2 && ple.streak.get(ple.streak.size()-1) && ple.name.equals("Ralune") && ple.isCanUsePassiveCharacter){
+            App.players[player].position = ple.position + 10;
+            App.players[player].isCanUsePassiveCharacter = false;
+        }
+
+        //tile rules
+        Tile tile=tiles[ple.position-1];
+        if(tile.snakeLadder!=null){
+            int[] sl = tile.snakeLadder;
+            if((sl[0]>sl[1]&&ple.isCanUseSnake) || (sl[0]<sl[1]&&ple.isCanUseLadder)){
+                App.players[player].position = sl[1];
+            }
+        }
     }
 
-    // public void buffPlayer(Character player,int changes, int type, String buffName){
-    //     if(buffName.equals("position"))
-    // }
+    public int getTurn(){
+        turn++;
+        if(App.players[turn%2].skipTurn>0){ 
+            App.players[turn%2].skipTurn = App.players[turn%2].skipTurn -1;
+            turn++;
+        }
+        return turn%2;
+    }
 }

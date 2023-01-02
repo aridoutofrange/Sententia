@@ -25,10 +25,6 @@ public class GUIMainMenu {
     private Button creditButton = new Button("Credit");
     private VBox pane,formPane, chooseCharacterPane, chooseDiffPane;
     private Label chooseCharacterLabel = new Label("Choose Character");
-    private Label chooseDiffLabel = new Label("Choose Difficult");
-    private Label hardLabel = new Label("Hard");
-    private Label mediumLabel = new Label("Medium");
-    private Label easyLabel = new Label("Easy");
 
     public GUIMainMenu(){
         formPane = new VBox(titleLabel,startButton,creditButton);
@@ -40,45 +36,6 @@ public class GUIMainMenu {
 
         pane = new VBox(formPane);
 
-        chooseDiffLabel.setAlignment(Pos.CENTER);
-        easyLabel.setAlignment(Pos.CENTER);
-        mediumLabel.setAlignment(Pos.CENTER);
-        hardLabel.setAlignment(Pos.CENTER);
-        chooseDiffLabel.setStyle("-fx-border-color: #5a3d28;-fx-border-radius: 7 7 7 7;-fx-background-radius: 7 7 7 7;-fx-background-color: #f2c26d;");
-        easyLabel.setStyle("-fx-border-color: #5a3d28;-fx-border-radius: 7 7 7 7;-fx-background-radius: 7 7 7 7;-fx-background-color: #f2c26d;");
-        mediumLabel.setStyle("-fx-border-color: #5a3d28;-fx-border-radius: 7 7 7 7;-fx-background-radius: 7 7 7 7;-fx-background-color: #f2c26d;");
-        hardLabel.setStyle("-fx-border-color: #5a3d28;-fx-border-radius: 7 7 7 7;-fx-background-radius: 7 7 7 7;-fx-background-color: #f2c26d;");
-        easyLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() { 
-            @Override 
-            public void handle(MouseEvent e) {
-                App.diff = 0;
-                try{
-                    App.setRoot(new GUIGame().getGUI());                
-                }catch(Exception er){System.out.println(er);}
-            }
-        });
-        mediumLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() { 
-            @Override 
-            public void handle(MouseEvent e) {
-                App.diff = 1;
-                try{
-                    App.setRoot(new GUIGame().getGUI());                
-                }catch(Exception er){System.out.println(er);}
-            }
-        });
-        hardLabel.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() { 
-            @Override 
-            public void handle(MouseEvent e) {
-                App.diff = 2;
-                try{
-                    App.setRoot(new GUIGame().getGUI());                
-                }catch(Exception er){System.out.println(er);}
-            }
-        });
-        
-        chooseDiffPane = new VBox(chooseDiffLabel,easyLabel,mediumLabel,hardLabel);
-        chooseDiffPane.setAlignment(Pos.CENTER);
-        chooseDiffPane.setSpacing(20);
         
         chooseCharacterLabel.setStyle("-fx-border-color: #5a3d28;-fx-border-radius: 7 7 7 7;-fx-background-radius: 7 7 7 7;-fx-background-color: #f2c26d;");
         chooseCharacterPane = new VBox(chooseCharacterLabel);
@@ -89,9 +46,12 @@ public class GUIMainMenu {
             card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() { 
                 @Override 
                 public void handle(MouseEvent e) {
-                    App.player1 = c;
+                    App.players[0] = c;
+                    App.players[0].playerType = EnumPlayerType.HUMAN;
                     pane.getChildren().remove(chooseCharacterPane);
-                    pane.getChildren().add(chooseDiffPane);
+                    try{
+                        App.setRoot(new GUIGame().getGUI());                
+                    }catch(Exception er){System.out.println(er);}
                 }
             });
             characterCards.add(card);

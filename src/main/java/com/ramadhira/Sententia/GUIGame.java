@@ -4,7 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-
+import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,6 +19,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 public class GUIGame {
     private Color[] tileColors = {Color.web("#d7ebf4"),Color.web("#a5bccb")};
@@ -26,7 +27,7 @@ public class GUIGame {
     private Label initialSquare = new Label();
 
     private Label backButton;
-    private Label diceButton, dice;
+    private Label diceButton;
 
     private HBox pane,boardPane,dicePane;
     private VBox statePane;
@@ -35,9 +36,6 @@ public class GUIGame {
     private Label p1,p2;
 
     public GUIGame(){
-        int[][] snakeLadder = {
-            {11,1}
-        };
 
         initialSquare.setPrefHeight(50);
         initialSquare.setPrefWidth(100);
@@ -46,7 +44,7 @@ public class GUIGame {
         initialSquare.setTranslateY(0);
 
 
-        gameBoard = new GameBoard(snakeLadder);
+        gameBoard = new GameBoard();
         Parent[] squares = new Parent[gameBoard.tiles.length];
         for(Tile tile : gameBoard.tiles){
             int position = tile.position;
@@ -84,9 +82,9 @@ public class GUIGame {
             }
         });
         diceButton = new GUIDiceButton().getGUI();
-        dice = new GUIDice(6).getGUI();
+        diceButton.addEventHandler(MouseEvent.MOUSE_CLICKED, diceAction);
 
-        dicePane = new HBox(dice);
+        dicePane = new HBox();
         dicePane.setAlignment(Pos.CENTER);
         dicePane.setPrefHeight(300);
         dicePane.setPrefWidth(250);
@@ -99,10 +97,46 @@ public class GUIGame {
         
         pane = new HBox(boardPane,statePane);
         pane.setBackground(new Background(new BackgroundImage(new Image(getClass().getResourceAsStream("bg.jpg")), null, null, null, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, false, true))));
+        p1 = new Label();
+        p2 = new Label();
+        p1 = App.players[0].getGameModel();
+        p2 = App.players[1].getGameModel();
 
-        p1 = App.player1.getGameModel();
-        p2 = App.player2.getGameModel();
+        p1.setTranslateX(-85);
+        p1.setTranslateY(-10);
+
+        p2.setTranslateX(-45);
+        p2.setTranslateY(-10);
+
+        board.getChildren().addAll(p1,p2);
         
     }
     public Parent getGUI(){return pane;}
+
+
+    EventHandler<MouseEvent> diceAction = new EventHandler<MouseEvent>() { 
+        @Override 
+        public void handle(MouseEvent e) { 
+            int turn = gameBoard.getTurn();
+            // Character tmpCh = App.players.get(turn);
+            gameBoard.movePlayer(turn);
+            Label diceUI = new GUIDice(gameBoard.latestDice).getGUI();
+            dicePane.getChildren().add(diceUI);
+            statePane.getChildren().remove(diceButton);
+            int pos = App.players[turn].position;
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> {
+                if(turn == 0){
+                    // butuh nilai x y posisi tile 1
+                    p1.setTranslateX((((pos-1)%10)+1)*49);
+                    p1.setTranslateY((((pos-1)/10)+1)*49);
+                }
+            });
+            pause.play();
+            statePane.getChildren().add(diceButton);
+            dicePane.getChildren().remove(diceUI);
+        }
+    };
+
+    
 }

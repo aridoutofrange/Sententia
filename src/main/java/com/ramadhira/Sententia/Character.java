@@ -31,8 +31,9 @@ public class Character {
     public int skipTurn;
     public Vector<Boolean> streak;
     Label p = new Label();
+    public int diff;
 
-    public Character(String name,String image,String gameModel){
+    public Character(String name,String image,String gameModel, int diff){
         p.setPrefHeight(20);
         p.setPrefWidth(20);
         p.setTranslateX(15);
@@ -43,6 +44,7 @@ public class Character {
         this.pasiveInformation = "";
         this.position = 0;
         this.streak = new Vector<>();
+        this.diff = diff;
     }
 
     public void move(int dice){
