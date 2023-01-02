@@ -49,7 +49,7 @@ public class Character {
 
     public void move(int dice){
         streak.add(dice == 6);
-        position = position + dice;
+        position = position + dice > 100? 100 - (position + dice - 100) :position + dice;
     }
 
     public Label getGameModel(){
