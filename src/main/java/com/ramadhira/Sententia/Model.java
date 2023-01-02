@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Model {
-   private final String db = "jdbc:mysql://localhost/runkad";
+   private final String db = "jdbc:mysql://localhost/sententia";
    private final String dbUser = "sware";
    private final String dbPassword = "sware";
    private Connection conn = null;
@@ -45,7 +45,7 @@ public class Model {
 
    public int create(String data) throws Exception {
       Statement stmt = conn.createStatement();
-      String query = "INSERT INTO "+ getName()+ " VALUES " + data;
+      String query = "INSERT INTO "+ getName()+ " " + data;
       return stmt.executeUpdate(query);
    }
 

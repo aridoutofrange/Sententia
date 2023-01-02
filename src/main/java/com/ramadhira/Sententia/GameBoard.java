@@ -83,7 +83,7 @@ public class GameBoard {
             alert.setContentText(App.players[player].name + " win the game");
             alert.show();
             try{
-                new ModelLeaderboard().create("(\""+App.players[player].name+"\","+score+")");
+                new ModelLeaderboard().create("(PlayerName,Score) VALUES (\""+App.players[player].name+"\","+score+")");
                 App.setRoot(new GUIMainMenu().getGUI());
                 App.players[0].position = 0;
                 App.players[0].steps = 0;
