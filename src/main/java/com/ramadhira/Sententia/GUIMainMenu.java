@@ -26,6 +26,10 @@ public class GUIMainMenu {
     private Button closeButton = new Button("Close");
     private Button backCharButton = new Button("Back");
     private Button backCreditButton = new Button("Back");
+    private Button singleButton = new Button("SINGLEPLAYER");
+    private Button multiButton = new Button("MULTIPLAYER");
+    private Button backChooseButton = new Button("BACK");
+    
     
     private Label nama1Label = new Label("RAMADHIRA AZZAHRA PUTRI");
     private Label nama2Label = new Label("MOCHAMAD KELVIN FADHILAH");
@@ -34,7 +38,7 @@ public class GUIMainMenu {
     private Label nama5Label = new Label("MELISA GALUH PARWATI");
     private Label nama6Label = new Label("VLADIO SADA ARIHTA SEMBIRING");
     
-    private VBox pane,formPane, chooseCharacterPane, chooseDiffPane,creditPane;
+    private VBox pane,formPane, chooseCharacterPane, chooseModePane,creditPane, multiPane;
     private Label chooseCharacterLabel = new Label("Choose Character");
 
     public GUIMainMenu(){
@@ -93,12 +97,36 @@ public class GUIMainMenu {
         creditPane.setPrefHeight(250);
         creditPane.setPrefWidth(220);
         
-        nama1Label.setPrefSize(300, 50);;
+        nama1Label.setPrefSize(300, 50);
         nama2Label.setPrefSize(300, 50);
         nama3Label.setPrefSize(300, 50);
         nama4Label.setPrefSize(300, 50);
         nama5Label.setPrefSize(300, 50);
         nama6Label.setPrefSize(300, 50);
+        
+        
+        
+        chooseModePane = new VBox(singleButton,multiButton,backChooseButton);
+        chooseModePane.setSpacing(50);
+        chooseModePane.setAlignment(Pos.CENTER);
+        chooseModePane.setBackground(new Background(new BackgroundFill(Color.ORANGE,CornerRadii.EMPTY,Insets.EMPTY)));
+        chooseModePane.setPrefHeight(250);
+        chooseModePane.setPrefWidth(220);
+        
+        singleButton.setPrefSize(300, 50);
+        multiButton.setPrefSize(300, 50);
+        backChooseButton.setPrefSize(50, 50);
+        
+        singleButton.addEventHandler(MouseEvent.MOUSE_CLICKED, singleBut);
+        backChooseButton.addEventHandler(MouseEvent.MOUSE_CLICKED, backchoBut);
+        multiButton.addEventHandler(MouseEvent.MOUSE_CLICKED, multiBut);
+        
+        
+        multiPane = new VBox();
+        multiPane.setAlignment(Pos.CENTER);
+        multiPane.setBackground(new Background(new BackgroundFill(Color.ORANGE,CornerRadii.EMPTY,Insets.EMPTY)));
+        multiPane.setPrefHeight(250);
+        multiPane.setPrefWidth(220);
         
         
     }
@@ -112,11 +140,35 @@ public class GUIMainMenu {
         }
     };
     
+    EventHandler<MouseEvent> singleBut = new EventHandler<MouseEvent>() { 
+        @Override 
+        public void handle(MouseEvent e) { 
+            pane.getChildren().remove(chooseModePane);
+            pane.getChildren().add(chooseCharacterPane);
+        }
+    };
+    
+    EventHandler<MouseEvent> backchoBut = new EventHandler<MouseEvent>() { 
+        @Override 
+        public void handle(MouseEvent e) { 
+            pane.getChildren().remove(chooseModePane);
+            pane.getChildren().add(formPane);
+        }
+    };
+    
+    EventHandler<MouseEvent> multiBut = new EventHandler<MouseEvent>() { 
+        @Override 
+        public void handle(MouseEvent e) { 
+            pane.getChildren().remove(chooseModePane);
+            pane.getChildren().add(multiPane);
+        }
+    };
+    
     EventHandler<MouseEvent> backChar = new EventHandler<MouseEvent>() { 
         @Override 
         public void handle(MouseEvent e) { 
             pane.getChildren().remove(chooseCharacterPane);
-            pane.getChildren().add(formPane);
+            pane.getChildren().add(chooseModePane);
         }
     };
     
@@ -141,7 +193,7 @@ public class GUIMainMenu {
         @Override 
         public void handle(MouseEvent e) { 
             pane.getChildren().remove(formPane);
-            pane.getChildren().add(chooseCharacterPane);
+            pane.getChildren().add(chooseModePane);
         }
     };
 
