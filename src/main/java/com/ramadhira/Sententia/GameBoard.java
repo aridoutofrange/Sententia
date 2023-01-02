@@ -81,7 +81,6 @@ public class GameBoard {
             alert.setContentText(App.players[player].name + " win the game");
             alert.show();
             try{
-
                 App.setRoot(new GUIMainMenu().getGUI());
             }catch(Exception e){System.out.println(e);}
         }

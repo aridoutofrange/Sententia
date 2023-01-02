@@ -34,6 +34,14 @@ public class GUIGame {
     private StackPane board;
     private GameBoard gameBoard;
     private Label p1,p2;
+    private Label[] diceLabels = {
+        new GUIDice(1).getGUI(),
+        new GUIDice(2).getGUI(),
+        new GUIDice(3).getGUI(),
+        new GUIDice(4).getGUI(),
+        new GUIDice(5).getGUI(),
+        new GUIDice(6).getGUI(),
+    };
 
     public GUIGame(){
 
@@ -88,6 +96,8 @@ public class GUIGame {
         dicePane.setAlignment(Pos.CENTER);
         dicePane.setPrefHeight(300);
         dicePane.setPrefWidth(250);
+        dicePane.getChildren().add(diceLabels[5]);
+
 
         statePane = new VBox(backButton,dicePane,diceButton);
         statePane.setPrefWidth(350);
@@ -120,29 +130,29 @@ public class GUIGame {
             int turn = gameBoard.getTurn();
             // Character tmpCh = App.players.get(turn);
             gameBoard.movePlayer(turn);
-            Label diceUI = new GUIDice(gameBoard.latestDice).getGUI();
-            diceUI.setTranslateZ(100);
-            dicePane.getChildren().add(diceUI);
+
+            dicePane.getChildren().clear();
+            dicePane.getChildren().add(diceLabels[gameBoard.latestDice-1]);
+            
             statePane.getChildren().remove(diceButton);
+
             int pos = App.players[turn].position;
             System.out.println(App.players[turn].name);
             System.out.println(App.players[turn].position);
             if(turn == 0){
-                // butuh nilai x y posisi tile 1
                 p1.setTranslateX((((pos-1)%10))*50+15);
                 p1.setTranslateY(((((pos-1)/10))*50+15)*-1);
             }
             if(turn == 1){
-                // butuh nilai x y posisi tile 1
                 p2.setTranslateX((((pos-1)%10))*50+15);
                 p2.setTranslateY(((((pos-1)/10))*50+15)*-1);
             }
-            // PauseTransition pause = new PauseTransition(Duration.seconds(1));
-            // pause.setOnFinished(event -> {
-            // });
-            // pause.play();
-            statePane.getChildren().add(diceButton);
-            dicePane.getChildren().remove(diceUI);
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> {
+                statePane.getChildren().add(diceButton);
+                dicePane.getChildren().clear();;
+            });
+            pause.play();
         }
     };
 
