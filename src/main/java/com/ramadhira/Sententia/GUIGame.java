@@ -34,6 +34,7 @@ public class GUIGame {
     private StackPane board;
     private GameBoard gameBoard;
     private Label p1,p2;
+    private Label urutan = new Label();
 
     public GUIGame(){
 
@@ -89,7 +90,7 @@ public class GUIGame {
         dicePane.setPrefHeight(300);
         dicePane.setPrefWidth(250);
 
-        statePane = new VBox(backButton,dicePane,diceButton);
+        statePane = new VBox(backButton,dicePane,diceButton,urutan);
         statePane.setPrefWidth(350);
         statePane.setSpacing(50);
         statePane.setAlignment(Pos.CENTER);
@@ -101,6 +102,8 @@ public class GUIGame {
         p2 = new Label();
         p1 = App.players[0].getGameModel();
         p2 = App.players[1].getGameModel();
+        
+        urutan.setPrefSize(150, 50);
 
         p1.setTranslateX(-85);
         p1.setTranslateY(-10);
@@ -131,11 +134,13 @@ public class GUIGame {
                 // butuh nilai x y posisi tile 1
                 p1.setTranslateX((((pos-1)%10))*50+15);
                 p1.setTranslateY(((((pos-1)/10))*50+15)*-1);
+                urutan.setText(" Urutan Player Ke-1");
             }
             if(turn == 1){
                 // butuh nilai x y posisi tile 1
                 p2.setTranslateX((((pos-1)%10))*50+15);
                 p2.setTranslateY(((((pos-1)/10))*50+15)*-1);
+                urutan.setText(" Urutan Player Ke-2");
             }
             // PauseTransition pause = new PauseTransition(Duration.seconds(1));
             // pause.setOnFinished(event -> {
