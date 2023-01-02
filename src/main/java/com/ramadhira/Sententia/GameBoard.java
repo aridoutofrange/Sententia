@@ -59,6 +59,7 @@ public class GameBoard {
         while(App.players[player].position != 100 && move){
 
             App.players[player].move(dice);
+            App.players[player].steps = App.players[player].steps + 1;
     
             // register each skill of characters
             if(ple.streak.size() == 2 && ple.streak.get(ple.streak.size()-1) && ple.name.equals("Ralune") && ple.isCanUsePassiveCharacter){
@@ -77,16 +78,17 @@ public class GameBoard {
             move = false;
         }
         if(App.players[player].position == 100 ){
-            // for(int i=0;i<App.players.length;i++){
-            //     App.players[i].position = 0
-            // }
+            int score = 1000000/App.players[player].steps;
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setContentText(App.players[player].name + " win the game");
             alert.show();
             try{
+                new ModelLeaderboard().create("(\""+App.players[player].name+"\","+score+")");
                 App.setRoot(new GUIMainMenu().getGUI());
                 App.players[0].position = 0;
+                App.players[0].steps = 0;
                 App.players[1].position = 0;
+                App.players[1].steps = 0;
                 App.gameMode = EnumGameMode.AGAINST_COMPUTER;
 
             }catch(Exception e){System.out.println(e);}

@@ -30,6 +30,7 @@ public class Character {
     public boolean isCanUsePassiveCharacter = true;
     public int skipTurn;
     public Vector<Boolean> streak;
+    public int steps =0;
     Label p = new Label();
     public int diff;
 
