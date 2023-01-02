@@ -21,7 +21,7 @@ public class GameBoard {
 
         // set computer
         if(App.gameMode == EnumGameMode.AGAINST_COMPUTER){
-
+            App.diff = App.players[0].diff;
             Random rn = new Random();
             int ic = 0;
             int cmp = rn.nextInt(2);
@@ -85,6 +85,10 @@ public class GameBoard {
             alert.show();
             try{
                 App.setRoot(new GUIMainMenu().getGUI());
+                App.players[0].position = 0;
+                App.players[1].position = 0;
+                App.gameMode = EnumGameMode.AGAINST_COMPUTER;
+
             }catch(Exception e){System.out.println(e);}
         }
     }
