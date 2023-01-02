@@ -140,7 +140,7 @@ public class GUIMainMenu {
         }
     };
     
-    EventHandler<MouseEvent> singleBut = new EventHandler<MouseEvent>() { 
+    EventHandler<MouseEvent> multiBut = new EventHandler<MouseEvent>() { 
         @Override 
         public void handle(MouseEvent e) { 
             pane.getChildren().remove(chooseModePane);
@@ -156,7 +156,7 @@ public class GUIMainMenu {
         }
     };
     
-    EventHandler<MouseEvent> multiBut = new EventHandler<MouseEvent>() { 
+    EventHandler<MouseEvent> singleBut = new EventHandler<MouseEvent>() { 
         @Override 
         public void handle(MouseEvent e) { 
             pane.getChildren().remove(chooseModePane);

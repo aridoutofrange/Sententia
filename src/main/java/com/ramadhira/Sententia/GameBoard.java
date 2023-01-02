@@ -77,6 +77,9 @@ public class GameBoard {
             move = false;
         }
         if(App.players[player].position == 100 ){
+            // for(int i=0;i<App.players.length;i++){
+            //     App.players[i].position = 0
+            // }
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setContentText(App.players[player].name + " win the game");
             alert.show();

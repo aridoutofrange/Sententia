@@ -42,6 +42,7 @@ public class GUIGame {
         new GUIDice(5).getGUI(),
         new GUIDice(6).getGUI(),
     };
+    private Label urutan = new Label();
 
     public GUIGame(){
 
@@ -99,7 +100,7 @@ public class GUIGame {
         dicePane.getChildren().add(diceLabels[5]);
 
 
-        statePane = new VBox(backButton,dicePane,diceButton);
+        statePane = new VBox(backButton,dicePane,diceButton,urutan);
         statePane.setPrefWidth(350);
         statePane.setSpacing(50);
         statePane.setAlignment(Pos.CENTER);
@@ -111,6 +112,8 @@ public class GUIGame {
         p2 = new Label();
         p1 = App.players[0].getGameModel();
         p2 = App.players[1].getGameModel();
+        
+        urutan.setPrefSize(150, 50);
 
         p1.setTranslateX(-85);
         p1.setTranslateY(-10);
@@ -142,10 +145,12 @@ public class GUIGame {
             if(turn == 0){
                 p1.setTranslateX((((pos-1)%10))*50+15);
                 p1.setTranslateY(((((pos-1)/10))*50+15)*-1);
+                urutan.setText(" Urutan Player Ke-1");
             }
             if(turn == 1){
                 p2.setTranslateX((((pos-1)%10))*50+15);
                 p2.setTranslateY(((((pos-1)/10))*50+15)*-1);
+                urutan.setText(" Urutan Player Ke-2");
             }
             PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(event -> {
