@@ -4,6 +4,9 @@ import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Vector;
+
 import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -19,6 +22,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 public class GUIGame {
@@ -51,11 +55,35 @@ public class GUIGame {
         initialSquare.setTranslateX(-100);
         initialSquare.setTranslateY(0);
 
+        Vector<Label> snakeLadderCards = new Vector<Label>();
 
+        // create board and its tiles
         gameBoard = new GameBoard();
         Parent[] squares = new Parent[gameBoard.tiles.length];
         for(Tile tile : gameBoard.tiles){
             int position = tile.position;
+
+            // snake ladder cards
+            if(tile.snakeLadder!=null){
+                int[] sl = tile.snakeLadder;
+                if(sl[0]>sl[1]){
+                    Label headSnakeCard = new GUISnakeLadderCard("D-<","#f2c26d").getGUI();
+                    Label tailSnakeCard = new GUISnakeLadderCard(">--","#f2c26d").getGUI();
+
+                    headSnakeCard.setTranslateX((50*((sl[0]-1)%10))+10);
+                    headSnakeCard.setTranslateY((50*((sl[0]-1)/10)*-1)+-1);
+                    headSnakeCard.setFont(new Font("roman", 10));
+                    headSnakeCard.setAlignment(Pos.CENTER);
+                    
+                    tailSnakeCard.setTranslateX((50*((sl[1]-1)%10))+10);
+                    tailSnakeCard.setTranslateY((50*((sl[1]-1)/10)*-1)+-1);
+                    tailSnakeCard.setAlignment(Pos.CENTER);
+                    tailSnakeCard.setFont(new Font("roman", 10));
+                    snakeLadderCards.add(headSnakeCard);
+                    snakeLadderCards.add(tailSnakeCard);
+                }
+            }
+
             Label square = new Label(String.valueOf(position));
             square.setBackground(new Background(new BackgroundFill((position+((position-1)/10))%2 == 0 ? tileColors[1]:tileColors[0],CornerRadii.EMPTY,Insets.EMPTY)));
             square.setTextFill(Color.BLACK);
@@ -74,6 +102,7 @@ public class GUIGame {
         board.setBackground(new Background(new BackgroundFill(Color.BLACK,CornerRadii.EMPTY,Insets.EMPTY)));
         board.getChildren().addAll(squares);
         board.getChildren().add(initialSquare);
+        board.getChildren().addAll(snakeLadderCards);
 
         boardPane = new HBox(board);
         boardPane.setPrefWidth(750);
