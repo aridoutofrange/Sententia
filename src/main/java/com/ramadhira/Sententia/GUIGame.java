@@ -124,12 +124,18 @@ public class GUIGame {
             dicePane.getChildren().add(diceUI);
             statePane.getChildren().remove(diceButton);
             int pos = App.players[turn].position;
+            System.out.println(App.players[turn].name);
             PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(event -> {
                 if(turn == 0){
                     // butuh nilai x y posisi tile 1
-                    p1.setTranslateX((((pos-1)%10)+1)*49);
-                    p1.setTranslateY((((pos-1)/10)+1)*49);
+                    p1.setTranslateX((((pos-1)%10)+1)*50);
+                    p1.setTranslateY(((((pos-1)/10))*50+15)*-1);
+                }
+                if(turn == 1){
+                    // butuh nilai x y posisi tile 1
+                    p2.setTranslateX((((pos-1)%10)+1)*50);
+                    p2.setTranslateY(((((pos-1)/10))*50+15)*-1);
                 }
             });
             pause.play();
