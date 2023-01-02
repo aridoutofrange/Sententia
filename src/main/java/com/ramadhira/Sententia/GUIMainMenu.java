@@ -160,7 +160,7 @@ public class GUIMainMenu {
         @Override 
         public void handle(MouseEvent e) { 
             pane.getChildren().remove(chooseModePane);
-            pane.getChildren().add(multiPane);
+            pane.getChildren().add(chooseCharacterPane);
         }
     };
     

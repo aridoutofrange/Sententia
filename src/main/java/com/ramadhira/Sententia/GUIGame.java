@@ -42,7 +42,6 @@ public class GUIGame {
         new GUIDice(5).getGUI(),
         new GUIDice(6).getGUI(),
     };
-    private Label urutan = new Label();
 
     public GUIGame(){
 
@@ -100,7 +99,7 @@ public class GUIGame {
         dicePane.getChildren().add(diceLabels[5]);
 
 
-        statePane = new VBox(backButton,dicePane,diceButton,urutan);
+        statePane = new VBox(backButton,dicePane,diceButton);
         statePane.setPrefWidth(350);
         statePane.setSpacing(50);
         statePane.setAlignment(Pos.CENTER);
@@ -113,7 +112,6 @@ public class GUIGame {
         p1 = App.players[0].getGameModel();
         p2 = App.players[1].getGameModel();
         
-        urutan.setPrefSize(150, 50);
 
         p1.setTranslateX(-85);
         p1.setTranslateY(-10);
@@ -130,36 +128,45 @@ public class GUIGame {
     EventHandler<MouseEvent> diceAction = new EventHandler<MouseEvent>() { 
         @Override 
         public void handle(MouseEvent e) { 
-            int turn = gameBoard.getTurn();
-            // Character tmpCh = App.players.get(turn);
-            gameBoard.movePlayer(turn);
-
-            dicePane.getChildren().clear();
-            dicePane.getChildren().add(diceLabels[gameBoard.latestDice-1]);
-            
-            statePane.getChildren().remove(diceButton);
-
-            int pos = App.players[turn].position;
-            System.out.println(App.players[turn].name);
-            System.out.println(App.players[turn].position);
-            if(turn == 0){
-                p1.setTranslateX((((pos-1)%10))*50+15);
-                p1.setTranslateY(((((pos-1)/10))*50+15)*-1);
-                urutan.setText(" Urutan Player Ke-1");
-            }
-            if(turn == 1){
-                p2.setTranslateX((((pos-1)%10))*50+15);
-                p2.setTranslateY(((((pos-1)/10))*50+15)*-1);
-                urutan.setText(" Urutan Player Ke-2");
-            }
-            PauseTransition pause = new PauseTransition(Duration.seconds(1));
-            pause.setOnFinished(event -> {
-                statePane.getChildren().add(diceButton);
-                dicePane.getChildren().clear();;
-            });
-            pause.play();
+            move();
         }
     };
+    public void move(){
+        int turn = gameBoard.getTurn();
+        // Character tmpCh = App.players.get(turn);
+        gameBoard.movePlayer(turn);
 
+        dicePane.getChildren().clear();
+        dicePane.getChildren().add(diceLabels[gameBoard.latestDice-1]);
+        
+        statePane.getChildren().remove(diceButton);
+
+        int pos = App.players[turn].position;
+        System.out.println(App.players[turn].name);
+        System.out.println(App.players[turn].position);
+        if(turn == 0){
+            p1.setTranslateX((((pos-1)%10))*50+15);
+            p1.setTranslateY(((((pos-1)/10))*50+15)*-1);
+        }
+        if(turn == 1){
+            p2.setTranslateX((((pos-1)%10))*50+15);
+            p2.setTranslateY(((((pos-1)/10))*50+15)*-1);
+        }
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
+        pause.setOnFinished(event -> {
+            statePane.getChildren().add(diceButton);
+            dicePane.getChildren().clear();;
+        });
+        pause.play();
+
+        if(App.players[gameBoard.turn%2].playerType != EnumPlayerType.HUMAN){
+            statePane.getChildren().remove(diceButton);
+            PauseTransition pauseAI = new PauseTransition(Duration.seconds(1));
+            pauseAI.setOnFinished(event -> {
+                move();
+            });
+            pauseAI.play();
+        }
+    }
     
 }
