@@ -81,6 +81,21 @@ public class GUIGame {
                     tailSnakeCard.setFont(new Font("roman", 10));
                     snakeLadderCards.add(headSnakeCard);
                     snakeLadderCards.add(tailSnakeCard);
+                }else{
+                    Label headLadderCard = new GUISnakeLadderCard("H","#f2c26d").getGUI();
+                    Label tailLadderCard = new GUISnakeLadderCard("H","#f2c26d").getGUI();
+
+                    headLadderCard.setTranslateX((50*((sl[0]-1)%10))+10);
+                    headLadderCard.setTranslateY((50*((sl[0]-1)/10)*-1)+-1);
+                    headLadderCard.setFont(new Font("roman", 10));
+                    headLadderCard.setAlignment(Pos.CENTER);
+                    
+                    tailLadderCard.setTranslateX((50*((sl[1]-1)%10))+10);
+                    tailLadderCard.setTranslateY((50*((sl[1]-1)/10)*-1)+-1);
+                    tailLadderCard.setAlignment(Pos.CENTER);
+                    tailLadderCard.setFont(new Font("roman", 10));
+                    snakeLadderCards.add(headLadderCard);
+                    snakeLadderCards.add(tailLadderCard);
                 }
             }
 
