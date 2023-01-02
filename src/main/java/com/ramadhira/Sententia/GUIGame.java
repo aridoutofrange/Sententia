@@ -65,6 +65,7 @@ public class GUIGame {
 
             // snake ladder cards
             if(tile.snakeLadder!=null){
+                // TODO : make the color unique each snake ladder card
                 int[] sl = tile.snakeLadder;
                 if(sl[0]>sl[1]){
                     Label headSnakeCard = new GUISnakeLadderCard("D-<","#f2c26d").getGUI();

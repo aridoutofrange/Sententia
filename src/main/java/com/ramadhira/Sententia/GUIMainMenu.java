@@ -64,6 +64,35 @@ public class GUIMainMenu {
                     App.players[0] = c;
                     App.players[0].playerType = EnumPlayerType.HUMAN;
                     pane.getChildren().remove(chooseCharacterPane);
+                    if(App.gameMode == EnumGameMode.AGAINST_HUMAN){
+
+                        Vector<VBox> characterCards = new Vector<VBox>();
+                        for(var c : App.characters){
+                            VBox card = new GUICard(c.name, c.image).getGUI();
+                            card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() { 
+                                @Override 
+                                public void handle(MouseEvent e) {
+                                    App.players[1] = c;
+                                    App.players[1].playerType = EnumPlayerType.HUMAN;
+                                    pane.getChildren().remove(chooseCharacterPane);
+                                    try{
+                                        App.setRoot(new GUIGame().getGUI());                
+                                    }catch(Exception er){System.out.println(er);}
+                                }
+                            });
+                            characterCards.add(card);
+                        }
+                        HBox cardList = new HBox();
+                        cardList.setSpacing(20);
+                        cardList.getChildren().addAll(characterCards);
+                        chooseCharacterLabel.setStyle("-fx-border-color: #5a3d28;-fx-border-radius: 7 7 7 7;-fx-background-radius: 7 7 7 7;-fx-background-color: #f2c26d;");
+                        chooseCharacterLabel.setText("Choose a character for Player 2");
+                        chooseCharacterPane.getChildren().clear();
+                        chooseCharacterPane.getChildren().addAll(chooseCharacterLabel,cardList);
+                        pane.getChildren().add(chooseCharacterPane);
+
+                    }
+                    
                     try{
                         App.setRoot(new GUIGame().getGUI());                
                     }catch(Exception er){System.out.println(er);}
@@ -143,6 +172,7 @@ public class GUIMainMenu {
     EventHandler<MouseEvent> multiBut = new EventHandler<MouseEvent>() { 
         @Override 
         public void handle(MouseEvent e) { 
+            App.gameMode = EnumGameMode.AGAINST_HUMAN;
             pane.getChildren().remove(chooseModePane);
             pane.getChildren().add(chooseCharacterPane);
         }
