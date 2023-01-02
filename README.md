@@ -21,10 +21,13 @@ There are 2 game modes in Sententia:
 Choose one that suits you the best.
 
 After choosing the game mode, you'll be redirected to the characters screen. Here, you can choose one of the newcomers of Exurus as your character. Remember, each of them have their own quirks, which affects the gameplay. Choose them wisely.
+![FA XXIV](https://user-images.githubusercontent.com/107428291/210200975-e314dece-7491-458b-9c43-6af46c07e2fc.png)
 
 FA XXIV, a seeker from Aeneus, will bring you towards the easy game mode, with his own quirks, of course. He's a simple folk and doesn't view life as a hard thing to do, and so his principle of life is represented in the game mode.
+![Ralune](https://user-images.githubusercontent.com/107428291/210200981-9f1e29d0-b4ae-4db2-97b9-bfa4f614bb77.png)
 
 Ralune, the engineer with unknown origin, will lead you to the medium game mode, with her own characteristics that'll spice up the gameplay. She's paradoxical to some extent; clear yet complex; so expect that in the game mode. 
+![Phase Quanta](https://user-images.githubusercontent.com/107428291/210200985-d49f83c8-d194-4e16-88b3-0d59f3e3ebc3.png)
 
 Phase Quanta, salesman of Cryocoze. Having both experiences of life and death, he will conduct you to the hard game mode, with his own peculiarity as a mannequin-robot hybrid. As entropy was his best friend back in the day, he's unfamiliar with life, seeing it as a complicated, encapsulated thing that separates itself from the world.
 
