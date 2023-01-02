@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -29,6 +30,8 @@ public class GUIMainMenu {
     private Button singleButton = new Button("SINGLEPLAYER");
     private Button multiButton = new Button("MULTIPLAYER");
     private Button backChooseButton = new Button("BACK");
+    private Button leaderboardButton = new Button("Leaderboard");
+    private Button backLeaderboardButton = new Button("Back");
     
     
     private Label nama1Label = new Label("RAMADHIRA AZZAHRA PUTRI");
@@ -41,8 +44,13 @@ public class GUIMainMenu {
     private VBox pane,formPane, chooseCharacterPane, chooseModePane,creditPane, multiPane;
     private Label chooseCharacterLabel = new Label("Choose Character");
 
+
+
     public GUIMainMenu(){
-        formPane = new VBox(titleLabel,startButton,creditButton,closeButton);
+        leaderboardButton.addEventHandler(MouseEvent.MOUSE_CLICKED, leaderboardAction);
+        backLeaderboardButton.addEventHandler(MouseEvent.MOUSE_CLICKED, backLeaderboardAction);
+
+        formPane = new VBox(titleLabel,startButton,leaderboardButton,creditButton,closeButton);
         formPane.setSpacing(20);
         formPane.setAlignment(Pos.CENTER);
         formPane.setBackground(new Background(new BackgroundFill(Color.AQUAMARINE,CornerRadii.EMPTY,Insets.EMPTY)));
@@ -224,6 +232,26 @@ public class GUIMainMenu {
         public void handle(MouseEvent e) { 
             pane.getChildren().remove(formPane);
             pane.getChildren().add(chooseModePane);
+        }
+    };
+
+    EventHandler<MouseEvent> leaderboardAction = new EventHandler<MouseEvent>() { 
+        @Override 
+        public void handle(MouseEvent e) { 
+            TableView<ModelLeaderboard> listView = new GUILeaderBoard().getGUI();
+            VBox leaderboardPane = new VBox(listView,backLeaderboardButton);
+            leaderboardPane.setAlignment(Pos.CENTER);
+            leaderboardPane.setSpacing(20);
+            pane.getChildren().clear();
+            pane.getChildren().add(leaderboardPane);
+        }
+    };
+
+    EventHandler<MouseEvent> backLeaderboardAction = new EventHandler<MouseEvent>() { 
+        @Override 
+        public void handle(MouseEvent e) { 
+            pane.getChildren().clear();
+            pane.getChildren().add(formPane);
         }
     };
 
