@@ -38,6 +38,6 @@ git clone https://github.com/aridoutofrange/Sententia/tree/development
 - When it's your turn, roll the dice to see how far you'd move 
 - Wait until it's your turn again 
 - If you stumble upon a ladder, you'll move upward towards the angle of the ladder 
-- If you stumble upon a snake, you'll move downwars towards the angle of the snake 
+- If you stumble upon a snake, you'll move downward towards the angle of the snake 
 - There will be bonus cards scattered all over the boxes, use them wisely 
 - Whoever reaches the 100th position first, they're the winner 
